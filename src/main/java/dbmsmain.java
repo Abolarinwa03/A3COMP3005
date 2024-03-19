@@ -44,7 +44,7 @@ public class dbmsmain {
     }
 
     public static void addStudent(Connection connection, Integer student_id, String first_name, String last_name, String email, String enrollmentDate) {
-        String insertsql = "INSERT INTO students (student_id, first_name, last_name, email, enrollment_date) VALUES ( ?, ?, ?, ?, ?)";
+        String insertsql = "INSERT INTO students (student_id, first_name, last_name, email, enrollment_date) VALUES ( ?, ?, ?, ?, ?)"; //easier way to set the values
         try (PreparedStatement pstmt = connection.prepareStatement(insertsql)) {
             pstmt.setInt(1, student_id);
             pstmt.setString(2, first_name);
@@ -64,18 +64,18 @@ public class dbmsmain {
         try (PreparedStatement pstmt = connection.prepareStatement(updateQuery)) {
             pstmt.setString(1, newEmail);
             pstmt.setInt(2, studentId);
-            int rowsUpdated = pstmt.executeUpdate();
+            int rowsUpdated = pstmt.executeUpdate(); //to confirm row was updated without having to use getAllStudents
             System.out.println(rowsUpdated + " student(s) updated.");
         }
 
     }
 
     public static void deleteStudent(Connection connection, int studentId) throws SQLException {
-        String query = "DELETE FROM students WHERE student_id = ?";
+        String query = "DELETE FROM students WHERE student_id = ?"; //query to delete student with student id as the parameter
         try (PreparedStatement pstmt = connection.prepareStatement(query)) {
             pstmt.setInt(1, studentId);
             int rowsDeleted = pstmt.executeUpdate();
-            System.out.println(rowsDeleted + " student(s) deleted.");
+            System.out.println(rowsDeleted + " student(s) deleted."); //Used this to confirm that the row was deleted
         }
     }
 
